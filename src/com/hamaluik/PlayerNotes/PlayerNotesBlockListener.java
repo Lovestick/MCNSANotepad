@@ -17,19 +17,25 @@ public class PlayerNotesBlockListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockBreak(BlockBreakEvent event) {
-		// get who broke the block..
-		String name = event.getPlayer().getName();
-		// update the stat..
-		plugin.getPlayerStats(name, true).blocksBroken++;
-		plugin.getPlayerStats(name, true).changed = true;
+		if (plugin.enableStats)
+		{
+			// get who broke the block..
+			String name = event.getPlayer().getName();
+			// update the stat..
+			plugin.getPlayerStats(name, true).blocksBroken++;
+			plugin.getPlayerStats(name, true).changed = true;
+		}
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockPlace(BlockPlaceEvent event) {
-		// get who broke the block..
-		String name = event.getPlayer().getName();
-		// update the stat..
-		plugin.getPlayerStats(name, true).blocksPlaced++;
-		plugin.getPlayerStats(name, true).changed = true;
+		if (plugin.enableStats)
+		{
+			// get who broke the block..
+			String name = event.getPlayer().getName();
+			// update the stat..
+			plugin.getPlayerStats(name, true).blocksPlaced++;
+			plugin.getPlayerStats(name, true).changed = true;
+		}
 	}
 }

@@ -46,6 +46,7 @@ public class PlayerNotes extends JavaPlugin {
 	String mysqlUser;
 	String mysqlPass;
 	private long statsDumpInterval;
+	boolean enableStats;
 	
 	// startup routine..
 	public void onEnable() {		
@@ -167,6 +168,7 @@ public class PlayerNotes extends JavaPlugin {
 		mysqlUser = config.getString("mysql-user");
 		mysqlPass = config.getString("mysql-pass");
 		statsDumpInterval = config.getInt("stats-dump-interval", 5) * 60;
+		enableStats = config.getBoolean("enable-stats", true);
 	}
 	
 	public void saveConfiguration() {

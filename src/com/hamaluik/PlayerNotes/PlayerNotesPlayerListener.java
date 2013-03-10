@@ -20,33 +20,42 @@ public class PlayerNotesPlayerListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		// get the player's stat
-		String name = event.getPlayer().getName();
-		Stat stat = plugin.getPlayerStats(name, true);
-		// update the join time and join numbers
-		stat.joinTime = System.currentTimeMillis() / 1000;
-		stat.lastLogin = new Date();
-		stat.numJoins++;
-		stat.changed = true;
+		if (plugin.enableStats)
+		{
+			// get the player's stat
+			String name = event.getPlayer().getName();
+			Stat stat = plugin.getPlayerStats(name, true);
+			// update the join time and join numbers
+			stat.joinTime = System.currentTimeMillis() / 1000;
+			stat.lastLogin = new Date();
+			stat.numJoins++;
+			stat.changed = true;
+		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onPlayerKick(PlayerKickEvent event) {
-		// get the player's stat
-		String name = event.getPlayer().getName();
-		Stat stat = plugin.getPlayerStats(name, true);
-		stat.numKicks++;
-		stat.changed = true;
+		if (plugin.enableStats)
+		{
+			// get the player's stat
+			String name = event.getPlayer().getName();
+			Stat stat = plugin.getPlayerStats(name, true);
+			stat.numKicks++;
+			stat.changed = true;
+		}
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		// get the player's stat
-		String name = event.getPlayer().getName();
-		Stat stat = plugin.getPlayerStats(name, true);
-		stat.timeOnServer += (System.currentTimeMillis() / 1000) - stat.joinTime;
-		stat.changed = true;
-		// and remove them from internal tracking!
-		plugin.unloadPlayerStat(name);
+		if (plugin.enableStats)
+		{
+			// get the player's stat
+			String name = event.getPlayer().getName();
+			Stat stat = plugin.getPlayerStats(name, true);
+			stat.timeOnServer += (System.currentTimeMillis() / 1000) - stat.joinTime;
+			stat.changed = true;
+			// and remove them from internal tracking!
+			plugin.unloadPlayerStat(name);
+		}
 	}
 }
