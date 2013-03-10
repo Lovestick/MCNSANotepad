@@ -3,7 +3,6 @@ main: com.hamaluik.PlayerNotes.PlayerNotes
 version: 1.1.0
 author: FuzzyWuzzie
 softdepend: [Permissions, ModTRS]
-database: true
 commands:
    n:
       description: write a note about a player

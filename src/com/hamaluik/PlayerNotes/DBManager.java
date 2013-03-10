@@ -1,5 +1,6 @@
 package com.hamaluik.PlayerNotes;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class DBManager {
 			}
 			else {
 				Class.forName("org.sqlite.JDBC");
-				connect = DriverManager.getConnection("jdbc:sqlite:"+plugin.databaseName);
+				connect = DriverManager.getConnection("jdbc:sqlite:"+new File(plugin.getDataFolder().getPath(), plugin.databaseName + ".sqlite").getPath());
 			}
 		}
 		catch(Exception e) {

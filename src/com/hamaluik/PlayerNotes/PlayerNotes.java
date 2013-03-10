@@ -6,14 +6,21 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import ru.tehkode.permissions.PermissionManager;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-import com.hamaluik.PlayerNotes.commands.*;
+import com.hamaluik.PlayerNotes.commands.Command;
+import com.hamaluik.PlayerNotes.commands.CommandNote;
+import com.hamaluik.PlayerNotes.commands.CommandNoteDelete;
+import com.hamaluik.PlayerNotes.commands.CommandNotes;
+import com.hamaluik.PlayerNotes.commands.CommandStats;
+import com.hamaluik.PlayerNotes.commands.CommandStatsGroup;
 
 public class PlayerNotes extends JavaPlugin {
 	// the basics
@@ -157,9 +164,19 @@ public class PlayerNotes extends JavaPlugin {
 	}
 	
 	public void loadConfiguration() {
-		this.getConfig().options().copyDefaults(true);
 		FileConfiguration config = this.getConfig();
 		
+		Configuration defaults = new YamlConfiguration();
+		defaults.set("database", "sqlite");
+		defaults.set("database-name", "PlayerNotes");
+		defaults.set("mysql-user", "");
+		defaults.set("mysql-pass", "");
+		defaults.set("stats-dump-interval", 5);
+		defaults.set("enable-stats", true);
+		
+		config.setDefaults(defaults);
+		config.options().copyDefaults(true);
+
 		String database = config.getString("database");
 		if(database.equalsIgnoreCase("mysql")) useMYSQL = true;
 		else useMYSQL = false;
