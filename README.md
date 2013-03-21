@@ -206,3 +206,48 @@ Further, the following replacements can be used (note that not all replacements 
 		<td>A time formatted as HH:MM:SS</td>
 	</tr>
 </table>
+
+### Default configuration
+
+	database:
+	  url: jdbc:mysql://localhost/mcnsa
+	  username: mcnsa
+	  password: mcnsa
+	database-error-string: '&cDatabase error (%ex.message%)'
+	proper-usage-string: '&6Usage: %usage%'
+	no-permission-command-string: '&cYou don''t have permission to do that!'
+	note:
+	  log-notes-to-console: true
+	  description-string: Writes a note about a given player
+	  console-no-note-args-string: '&cError (%command%): You must provide a note!'
+	  no-player-arg-string: '&cError (%command%): You must provide a player to write a
+	    note about!'
+	  console-usage-string: /note <player> <notes>
+	  player-usage-string: /note <player> [notes]
+	  failed-to-record-note-string: '&cError: failed to record the note! (Database error)'
+	  successful-note-string: '&aYour note about %targetPlayer% has been successfully
+	    recorded'
+	notes:
+	  notes-per-page: 5
+	  no-player-arg-string: '&cError (%command%): You must provide a player to write a
+	    note about!'
+	  no-notes-string: '&6%targetPlayer% doesn''t have any notes!'
+	  invalid-page-number-string: '&cInvalid page number (there are %numPages% pages)!'
+	  note-header-string: '&e--- &6Notes for &f%targetPlayer% &6(Page &f%page%&6/&f%numPages%&6)
+	    &e---'
+	  noteFormat-string: '&7[%date%] &6%noteTaker%: &f%note% &7(%noteID%)'
+	  usage-string: /notes <player> [page]
+	  description-string: Shows you the notes for a given player
+	information:
+	  version-format-string: '&6MCNSANotepad &eVersion &f%version%'
+	  help-header-string: '&e--- &6MCNSANotepad &fHelp &e---'
+	  command-listing-string: "%usage%\n\t%description%"
+	  usage-string: /notepad [version]
+	  description-string: Gives help about the MCNSANotepad commands
+	multiline-chat:
+	  cancelled-string: '&aText entry cancelled'
+	  added-text-string: '&9Added text: &f%addedText%'
+	  already-entering-string: '&cYou are already entering multiline text!'
+	  begin-entering-string: '&aYou are now entering multiline text. Continue entering
+	    text, line-by-line, until you''re done. When you''re done, send ''done'' by itself
+	    on its own line (or ''cancel'' to stop).'
