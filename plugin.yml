@@ -1,0 +1,11 @@
+name: MCNSANotepad
+main: com.mcnsa.notepad.MCNSANotepad
+version: 1.0b
+depend: [PermissionsEx]
+commands:
+  note:
+    description: Adds a note about a player
+  notes:
+    description: Gets notes about a player
+  notepad:
+    description: Information about the notepad plugin
