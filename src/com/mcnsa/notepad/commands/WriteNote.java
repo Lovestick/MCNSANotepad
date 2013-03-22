@@ -91,7 +91,6 @@ public class WriteNote implements CommandHandler {
 		}
 	}
 
-	@Override
 	public void onChatComplete(Player player, String note, Object... args) throws CommandException, DatabaseException {
 		// make sure we check our args
 		if(args.length != 1 || args[0].getClass().equals(OfflinePlayer.class)) {

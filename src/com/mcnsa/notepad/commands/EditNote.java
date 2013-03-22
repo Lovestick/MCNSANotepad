@@ -44,7 +44,6 @@ public class EditNote implements CommandHandler {
 		}
 	}
 	
-	@Override
 	public void onExecute(CommandSender sender, String[] args)
 			throws CommandException, CommandUsageException, DatabaseException {
 		// deal with arguments
@@ -102,7 +101,6 @@ public class EditNote implements CommandHandler {
 		}
 	}
 
-	@Override
 	public void onChatComplete(Player player, String note,
 			Object... args) throws CommandException, DatabaseException {
 		// make sure we check our args

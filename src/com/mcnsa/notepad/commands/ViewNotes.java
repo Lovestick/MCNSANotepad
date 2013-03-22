@@ -29,7 +29,6 @@ public class ViewNotes implements CommandHandler {
 	@CustomString(node = "notes.usage") public static String usage = "/notes <player> [page]";
 	@CustomString(node = "notes.description") public static String description = "Shows you the notes for a given player";
 
-	@Override
 	public void onExecute(CommandSender sender, String[] args)
 			throws CommandException, CommandUsageException, DatabaseException {
 		// make sure they have a player target
@@ -98,7 +97,6 @@ public class ViewNotes implements CommandHandler {
 		}
 	}
 
-	@Override
 	public void onChatComplete(Player player, String enteredText,
 			Object... args) throws CommandException, DatabaseException {
 		// do nothing

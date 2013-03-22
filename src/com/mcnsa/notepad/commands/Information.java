@@ -37,7 +37,6 @@ public class Information implements CommandHandler {
 		ColourHandler.sendMessage(sender, ((new CustomStringContext(versionStringFormat)).setCommandSender(sender).setVersion(version)).toString());
 	}
 
-	@Override
 	public void onExecute(CommandSender sender, String[] args)
 			throws CommandException, CommandUsageException, DatabaseException {
 		// deal with the version stuff off the bat
@@ -79,7 +78,6 @@ public class Information implements CommandHandler {
 		ColourHandler.sendMessage(sender, notepadContext.toString());
 	}
 
-	@Override
 	public void onChatComplete(Player player, String enteredText,
 			Object... args) throws CommandException, DatabaseException {
 		// nothing to do here

@@ -28,7 +28,6 @@ public class CommandManager implements CommandExecutor {
 	private ViewNotes viewNotesCommand = new ViewNotes();
 	private Information informationCommand = new Information();
 	
-	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		try {
 			if(command.getName().equalsIgnoreCase("note")) {

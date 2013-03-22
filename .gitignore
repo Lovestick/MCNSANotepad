@@ -1,12 +1,6 @@
 *.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-.settings/
-doc/*
-bin/
-.classpath
-.project
+.settings
+target/classes
+target/generated-sources
+target/maven-archiver
+target/surefire

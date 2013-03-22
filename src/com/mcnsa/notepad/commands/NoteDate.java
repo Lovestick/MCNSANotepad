@@ -26,7 +26,6 @@ public class NoteDate implements CommandHandler {
 	@CustomString(node = "notedate.invalid-time") public static String invalidTime = "&cInvalid time format! Use: HH:MM:SS";
 	@CustomString(node = "notedate.failed-edit") public static String failedEdit = "&cError: failed to edit the note's date! (Database error)";
 
-	@Override
 	public void onExecute(CommandSender sender, String[] args)
 			throws CommandException, CommandUsageException, DatabaseException {
 		// make sure we have appropriate args
@@ -119,7 +118,6 @@ public class NoteDate implements CommandHandler {
 		}
 	}
 
-	@Override
 	public void onChatComplete(Player player, String enteredText,
 			Object... args) throws CommandException, DatabaseException {
 		// do nothing
