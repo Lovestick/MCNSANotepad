@@ -237,6 +237,17 @@ Further, the following replacements can be used (note that not all replacements 
 	  failed-to-record-note-string: '&cError: failed to record the note! (Database error)'
 	  successful-note-string: '&aYour note about %targetPlayer% has been successfully
 	    recorded'
+	editnote:
+	  console-usage-string: /editnote <noteID> <notes>
+	  player-usage-string: /editnote <noteID> [notes]
+	  invalid-id-string: '&cInvalid note ID %noteID%!'
+	  successful-string: '&aNote %noteID% has been saved!'
+	notedate:
+	  invalid-args-string: '&cInvalid arguments!'
+	  usage-string: /notedate <noteID> <new date> [new time]
+	  invalid-date-string: '&cInvalid date format! Use: YYYY-MM-DD'
+	  invalid-time-string: '&cInvalid time format! Use: HH:MM:SS'
+	  failed-edit-string: '&cError: failed to edit the note''s date! (Database error)'
 	notes:
 	  notes-per-page: 5
 	  no-player-arg-string: '&cError (%command%): You must provide a player to write a
@@ -261,3 +272,33 @@ Further, the following replacements can be used (note that not all replacements 
 	  begin-entering-string: '&aYou are now entering multiline text. Continue entering
 	    text, line-by-line, until you''re done. When you''re done, send ''done'' by itself
 	    on its own line (or ''cancel'' to stop).'
+
+## Note API
+An API is built into the plugin which enables other plugins to write, edit, and read notes about players. The API is accessed through the NoteManager class, which can be accessed as such:
+
+	if(Bukkit.getServer().getPluginManager().isPluginEnabled("MCNSANotepad")) {
+		NoteManager noteManager = MCNSANotepad.getNoteManager();
+	}
+
+The note manager provides four functions to manipulate the notes with:
+
+* int writeNote(CommandSender sender, String targetPlayer, String note)
+    - arguments:
+        * sender: who is writing the note (can be console / player)
+        * targetPlayer: who the note is about (exact)
+        * note: the note being written
+    - returns: 0 if failed, 1 if successful
+* int editNote(Integer noteID, String note)
+    - arguments:
+        * noteID: the id of the note being edited
+        * note: the note being written
+    - returns: 0 if failed, 1 if successful
+* int editDate(Integer noteID, Timestamp date)
+    - arguments:
+        * noteID: the id of the note being edited
+        * date: the new timestamp of the note
+    - returns: 0 if failed, 1 if successful
+* ArrayList<Note> getPlayerNotes(String targetPlayer)
+    - arguments:
+        * targetPlayer: who the note is about (exact)
+    - returns: an array of all notes matching the targetPlayer, sorted by date (most recent first)
