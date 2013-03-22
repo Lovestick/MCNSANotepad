@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.mcnsa.notepad.annotations.CustomString;
+import com.mcnsa.notepad.commands.EditNote;
 import com.mcnsa.notepad.commands.Information;
 import com.mcnsa.notepad.commands.ViewNotes;
 import com.mcnsa.notepad.commands.WriteNote;
@@ -19,8 +20,9 @@ public class CommandManager implements CommandExecutor {
 	@CustomString(node = "database-error") public static String databaseError = "&cDatabase error (%ex.message%)";
 	@CustomString(node = "proper-usage") public static String usage = "&6Usage: %usage%";
 	@CustomString(node = "no-permission-command") public static String noPermissionString = "&cYou don't have permission to do that!";
-	
+
 	private WriteNote writeNoteCommand = new WriteNote();
+	private EditNote editNoteCommand = new EditNote();
 	private ViewNotes viewNotesCommand = new ViewNotes();
 	private Information informationCommand = new Information();
 	
@@ -32,6 +34,12 @@ public class CommandManager implements CommandExecutor {
 					throw new PermissionException("writenotes");
 				}
 				writeNoteCommand.onExecute(sender, args);
+			}
+			else if(command.getName().equalsIgnoreCase("editnote")) {
+				if(!PermissionsManager.playerHasPermission(sender, "editnotes")) {
+					throw new PermissionException("editnotes");
+				}
+				editNoteCommand.onExecute(sender, args);
 			}
 			else if(command.getName().equalsIgnoreCase("notes")) {
 				if(!PermissionsManager.playerHasPermission(sender, "viewnotes")) {

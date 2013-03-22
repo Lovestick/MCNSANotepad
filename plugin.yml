@@ -7,5 +7,9 @@ commands:
     description: Adds a note about a player
   notes:
     description: Gets notes about a player
+  notedate:
+    description: Changes the date of a note
+  editnote:
+    description: Edits an existing note
   notepad:
     description: Information about the notepad plugin

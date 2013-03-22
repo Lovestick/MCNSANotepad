@@ -38,7 +38,7 @@ public class MCNSANotepad extends JavaPlugin {
 		DatabaseTableInfo notesTable = new DatabaseTableInfo();
 		notesTable.name = "notes";
 		notesTable.fields = new String[]{
-				"date TIMESTAMP",
+				"date TIMESTAMP DEFAULT 0",
 				"noteTaker TINYTEXT",
 				"notee TINYTEXT",
 				"note TEXT"
@@ -52,6 +52,8 @@ public class MCNSANotepad extends JavaPlugin {
 		commandManager = new CommandManager();
 		this.getCommand("note").setExecutor(commandManager);
 		this.getCommand("notes").setExecutor(commandManager);
+		this.getCommand("editnote").setExecutor(commandManager);
+		this.getCommand("notedate").setExecutor(commandManager);
 		this.getCommand("notepad").setExecutor(commandManager);
 		
 		// load our multiline chat handler
