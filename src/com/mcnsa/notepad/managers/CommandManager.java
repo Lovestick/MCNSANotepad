@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import com.mcnsa.notepad.annotations.CustomString;
 import com.mcnsa.notepad.commands.EditNote;
 import com.mcnsa.notepad.commands.Information;
+import com.mcnsa.notepad.commands.NoteDate;
 import com.mcnsa.notepad.commands.ViewNotes;
 import com.mcnsa.notepad.commands.WriteNote;
 import com.mcnsa.notepad.exceptions.CommandException;
@@ -23,6 +24,7 @@ public class CommandManager implements CommandExecutor {
 
 	private WriteNote writeNoteCommand = new WriteNote();
 	private EditNote editNoteCommand = new EditNote();
+	private NoteDate noteDateCommand = new NoteDate();
 	private ViewNotes viewNotesCommand = new ViewNotes();
 	private Information informationCommand = new Information();
 	
@@ -34,6 +36,18 @@ public class CommandManager implements CommandExecutor {
 					throw new PermissionException("writenotes");
 				}
 				writeNoteCommand.onExecute(sender, args);
+			}
+			else if(command.getName().equalsIgnoreCase("editnote")) {
+				if(!PermissionsManager.playerHasPermission(sender, "editnotes")) {
+					throw new PermissionException("editnotes");
+				}
+				editNoteCommand.onExecute(sender, args);
+			}
+			else if(command.getName().equalsIgnoreCase("notedate")) {
+				if(!PermissionsManager.playerHasPermission(sender, "editnotes")) {
+					throw new PermissionException("editnotes");
+				}
+				noteDateCommand.onExecute(sender, args);
 			}
 			else if(command.getName().equalsIgnoreCase("editnote")) {
 				if(!PermissionsManager.playerHasPermission(sender, "editnotes")) {
