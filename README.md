@@ -17,6 +17,16 @@ A notepad for moderators and admins. Note down stuff about players.
 		<td>Adds a note about the given player. If command issuer is a player and [note] is blank / not provided, user will enter multiline text mode. In this mode, every chat message the send will add to the note string, until they enter the line 'done' by itself. They can also enter the line 'cancel' to cancel the command and text entry. Console <b>must</b> use the [note] parameter</td>
 	</tr>
 	<tr>
+		<td>/editnote &lt;note ID&gt; [note]</td>
+		<td>mcnsanotepad.editnotes</td>
+		<td>Updates the text of a given note. Note entry works the same as the /note command, utilizing both command line and multiline text entry.</td>
+	</tr>
+	<tr>
+		<td>/notedate &lt;note ID&gt; <new date> [new time]</td>
+		<td>mcnsanotepad.editnotes</td>
+		<td>Updates the date (and time) of a given note. Date should be in the format YYYY-MM-DD and time should be in the format HH:MM:SS</td>
+	</tr>
+	<tr>
 		<td>/notes &lt;player&gt; [page]</td>
 		<td>mcnsanotepad.viewnotes</td>
 		<td>Reads notes about a given player. Will pageinate results for easier reading.</td>
