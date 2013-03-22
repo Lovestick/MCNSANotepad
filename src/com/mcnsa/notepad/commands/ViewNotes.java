@@ -1,20 +1,19 @@
 package com.mcnsa.notepad.commands;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.mcnsa.notepad.MCNSANotepad;
 import com.mcnsa.notepad.annotations.CustomString;
 import com.mcnsa.notepad.annotations.Setting;
 import com.mcnsa.notepad.exceptions.CommandException;
 import com.mcnsa.notepad.exceptions.CommandUsageException;
 import com.mcnsa.notepad.exceptions.DatabaseException;
 import com.mcnsa.notepad.interfaces.CommandHandler;
-import com.mcnsa.notepad.managers.DatabaseManager;
+import com.mcnsa.notepad.managers.NoteManager.Note;
 import com.mcnsa.notepad.utilities.ColourHandler;
 import com.mcnsa.notepad.utilities.CustomStringContext;
 import com.mcnsa.notepad.utilities.PlayerMatcher;
@@ -47,16 +46,14 @@ public class ViewNotes implements CommandHandler {
 		}
 		
 		// get a resultset of all our notes
-		ArrayList<HashMap<String, Object>> results = DatabaseManager.accessQuery(
-				"select * from notes where notee=? order by date desc;",
-				targetPlayer);
-		if(results.size() == 0) {
+		ArrayList<Note> notes = MCNSANotepad.getNoteManager().getPlayerNotes(targetPlayer);
+		if(notes.size() == 0) {
 			throw new CommandException((new CustomStringContext(noNotes)).setTargetPlayer(targetPlayer));
 		}
 		
 		// calculate the number of pages
-		int totalPages = results.size() / notesPerPage;
-		if(results.size() % 5 != 0) totalPages++;
+		int totalPages = notes.size() / notesPerPage;
+		if(notes.size() % 5 != 0) totalPages++;
 		
 		// parse the page
 		int page = 1;
@@ -79,8 +76,8 @@ public class ViewNotes implements CommandHandler {
 		// calculate the start and end warp indices
 		int start = page * notesPerPage;
 		int end = start + notesPerPage;
-		if(end > results.size()) {
-			end = results.size();
+		if(end > notes.size()) {
+			end = notes.size();
 		}
 		
 		// ok, we have our start and end
@@ -88,11 +85,11 @@ public class ViewNotes implements CommandHandler {
 		ColourHandler.sendMessage(sender, ((new CustomStringContext(noteHeader)).setTargetPlayer(targetPlayer).setPage(page + 1).setNumPages(totalPages)).toString());
 		for(int i = start; i < end; i++) {
 			CustomStringContext noteContext = new CustomStringContext(noteFormat);
-			noteContext.setTargetPlayer((String)results.get(i).get("notee"));
-			noteContext.setNoteTaker((String)results.get(i).get("noteTaker"));
-			noteContext.setTimestamp((Timestamp)results.get(i).get("date"));
-			noteContext.setNoteID((Integer)results.get(i).get("id"));
-			noteContext.setNote((String)results.get(i).get("note"));
+			noteContext.setTargetPlayer(notes.get(i).notee);
+			noteContext.setNoteTaker(notes.get(i).noteTaker);
+			noteContext.setTimestamp(notes.get(i).date);
+			noteContext.setNoteID(notes.get(i).noteID);
+			noteContext.setNote(notes.get(i).note);
 			ColourHandler.sendMessage(sender, noteContext.toString());
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.mcnsa.notepad.MCNSANotepad;
 import com.mcnsa.notepad.annotations.CustomString;
 import com.mcnsa.notepad.exceptions.CommandException;
 import com.mcnsa.notepad.exceptions.CommandUsageException;
@@ -24,11 +25,8 @@ public class EditNote implements CommandHandler {
 	@CustomString(node = "editnote.successful") public static String successful = "&aNote %noteID% has been saved!";
 
 	public void updateNote(CommandSender sender, Integer noteID, String note) throws DatabaseException, CommandException {
-		// add the note
-		int results = DatabaseManager.updateQuery(
-				"update notes set note=? where id=?;",
-				note,
-				noteID);
+		// edit the note
+		int results = MCNSANotepad.getNoteManager().editNote(noteID, note);
 		
 		// make sure it worked!
 		if(results == 0) {

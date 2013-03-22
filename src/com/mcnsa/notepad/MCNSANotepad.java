@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.mcnsa.notepad.managers.CommandManager;
 import com.mcnsa.notepad.managers.ConfigurationManager;
 import com.mcnsa.notepad.managers.DatabaseManager;
+import com.mcnsa.notepad.managers.NoteManager;
 import com.mcnsa.notepad.managers.PermissionsManager;
 import com.mcnsa.notepad.utilities.DatabaseTableInfo;
 import com.mcnsa.notepad.utilities.Logger;
@@ -17,6 +18,7 @@ public class MCNSANotepad extends JavaPlugin {
 	
 	// our managers
 	PermissionsManager permissionsManager = null;
+	static NoteManager noteManager = null;
 	DatabaseManager databaseManager = null;
 	ConfigurationManager configurationManager = null;
 	
@@ -47,6 +49,9 @@ public class MCNSANotepad extends JavaPlugin {
 		
 		// initialize our database manager
 		databaseManager = new DatabaseManager();
+		
+		// our note manager
+		noteManager = new NoteManager();
 		
 		// set our command executors
 		commandManager = new CommandManager();
@@ -81,5 +86,9 @@ public class MCNSANotepad extends JavaPlugin {
 	
 	public static MCNSANotepad getInstance() {
 		return instance;
+	}
+	
+	public static NoteManager getNoteManager() {
+		return noteManager;
 	}
 }

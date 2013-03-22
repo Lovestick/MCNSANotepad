@@ -9,6 +9,7 @@ import java.util.HashMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.mcnsa.notepad.MCNSANotepad;
 import com.mcnsa.notepad.annotations.CustomString;
 import com.mcnsa.notepad.exceptions.CommandException;
 import com.mcnsa.notepad.exceptions.CommandUsageException;
@@ -99,10 +100,7 @@ public class NoteDate implements CommandHandler {
 		Timestamp newTimestamp = new Timestamp(cal.getTimeInMillis());
 		
 		// and update the query
-		int numResults = DatabaseManager.updateQuery(
-				"update notes set date=? where id=?;",
-				newTimestamp,
-				noteID);
+		int numResults = MCNSANotepad.getNoteManager().editDate(noteID, newTimestamp);
 		
 		// make sure it worked!
 		if(numResults == 0) {

@@ -1,18 +1,16 @@
 package com.mcnsa.notepad.commands;
 
-import java.sql.Timestamp;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.mcnsa.notepad.MCNSANotepad;
 import com.mcnsa.notepad.annotations.CustomString;
 import com.mcnsa.notepad.annotations.Setting;
 import com.mcnsa.notepad.exceptions.CommandException;
 import com.mcnsa.notepad.exceptions.CommandUsageException;
 import com.mcnsa.notepad.exceptions.DatabaseException;
 import com.mcnsa.notepad.interfaces.CommandHandler;
-import com.mcnsa.notepad.managers.DatabaseManager;
 import com.mcnsa.notepad.utilities.ColourHandler;
 import com.mcnsa.notepad.utilities.CustomStringContext;
 import com.mcnsa.notepad.utilities.Logger;
@@ -30,13 +28,7 @@ public class WriteNote implements CommandHandler {
 	@CustomString(node = "note.successful-note") public static String successfulNote = "&aYour note about %targetPlayer% has been successfully recorded";
 	
 	public void writeNote(CommandSender sender, OfflinePlayer targetPlayer, String note) throws DatabaseException, CommandException {
-		// add the note
-		int results = DatabaseManager.updateQuery(
-				"insert into notes (id, date, noteTaker, notee, note) values (NULL, ?, ?, ?, ?);",
-				new Timestamp(System.currentTimeMillis()),
-				sender.getName(),
-				targetPlayer.getName(),
-				note);
+		int results = MCNSANotepad.getNoteManager().writeNote(sender, targetPlayer.getName(), note);
 		
 		// make sure it worked!
 		if(results == 0) {
