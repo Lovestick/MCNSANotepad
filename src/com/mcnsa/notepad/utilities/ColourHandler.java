@@ -1,9 +1,10 @@
 package com.mcnsa.notepad.utilities;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.craftbukkit.v1_4_R1.command.ColouredConsoleSender;
+//import org.bukkit.craftbukkit.v1_4_R1.command.ColouredConsoleSender;
 
 public class ColourHandler {
 	static Integer nextColour = new Integer(0);	
@@ -151,6 +152,7 @@ public class ColourHandler {
 		if(message.length() < 1) {
 			return;
 		}
-		ColouredConsoleSender.getInstance().sendMessage(ColourHandler.processConsoleColours(message));
+		//ColouredConsoleSender.getInstance().sendMessage(ColourHandler.processConsoleColours(message));
+		Bukkit.getServer().getConsoleSender().sendMessage(ColourHandler.processConsoleColours(message));
 	}
 }
